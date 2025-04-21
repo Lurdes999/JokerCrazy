@@ -135,7 +135,7 @@
     // Variables de configuración
     const accessToken = "EAAoe6urdLAYBOZCvZApV25wjtm8ZA742O085z009lXNsqBZCNqNqaXedyarKLyyKFXZCK7hRgQ9vDnfaDveGP3aZAita7ofLmpquZBlKZBFaNMHa66yZAsgD1ZCCBTG89gm4lzlczKlUuMFTZBIvRS3oCycrYUtKzFg636HZCu5LuIXGRXonURwZAh5bBmZByVvhmampvtigZDZD"; // Reemplázalo con tu token de acceso de la API de conversiones
     const pixelId = "1721319675085704"; // Reemplázalo con tu Pixel ID de Meta
-    const conversionValue = 5.00;  // Ajusta el valor de la conversión
+    const conversionValue = ;  // Ajusta el valor de la conversión
     const currency = "ARS";  // Ajusta la moneda
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -143,18 +143,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (whatsappButton) {
         whatsappButton.addEventListener('click', function () {
-
+            // Definir el evento dinámicamente
             const eventos = ["Comprar"];
             const eventoSeleccionado = eventos[Math.floor(Math.random() * eventos.length)]; // Alterna entre los dos eventos
 
             console.log(`Evento seleccionado: ${eventoSeleccionado}`);
 
-
+            // Enviar evento a Facebook Pixel
             fbq('track', eventoSeleccionado, { 
                 content_name: 'Clic en botón WhatsApp',
                 content_category: 'Interacción de usuario'
             });
 
+            // Enviar evento a la API de Conversiones de Facebook
             fetch(`https://graph.facebook.com/v18.0/${pixelId}/events`, {
                 method: "POST",
                 headers: {
@@ -162,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 body: JSON.stringify({
                     data: [{
-                        event_name: eventoSeleccionado, 
+                        event_name: eventoSeleccionado, // Aquí cambia entre "Comprar" y "Cliente Potencial"
                         event_time: Math.floor(Date.now() / 1000),
                         action_source: "website",
                         event_source_url: window.location.href,
@@ -186,7 +187,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.warn("No se encontró el botón de WhatsApp.");
     }
 });
-
 </script>
 
 </head>
